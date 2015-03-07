@@ -6,7 +6,7 @@ class Complex_Number {
     /**
      * Construct a complex number using the $real and $imaginary part
      */
-    public function __construct(float $real,float $imaginary) {
+    public function __construct($real, $imaginary) {
         $this->_real = $real;
         $this->_imaginary = $imaginary;
     }
@@ -47,16 +47,19 @@ class Complex_Number {
     /**
      * Returns a string representation of a complex number
      */
-    public function toString() {
+    public function toString($surroundWithBrackets = false) {
         $output = '';
-        if ($real != 0) {
-            $output = $real;
+        if ($this->_real != 0) {
+            $output = $this->_real;
         }
         if ($this->_imaginary < 0) {
-            $output .= ' ' . $this->_imaginary . 'i';
+            $output .= ' - ' . (-1 * $this->_imaginary) . 'i';
         } else if ($this->_imaginary > 0) {
             $output .= ' + '.$this->_imaginary . 'i';
         } 
+        if ($surroundWithBrackets) {
+            $output = '(' . $output . ')';
+        }
         return $output;
     }
 }
