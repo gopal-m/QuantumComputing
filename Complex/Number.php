@@ -7,8 +7,8 @@ class Complex_Number {
      * Construct a complex number using the $real and $imaginary part
      */
     public function __construct($real, $imaginary) {
-        $this->_real = $real;
-        $this->_imaginary = $imaginary;
+        $this->_real = (float)$real;
+        $this->_imaginary = (float)$imaginary;
     }
     
     /**
@@ -58,6 +58,30 @@ class Complex_Number {
         $this->_real = (($real * $c->getReal()) + ($imaginary * $c->getImaginary())) / $divisor;
         $this->_imaginary = (($c->getReal() * $imaginary) - ($real * $c->getImaginary())) / $divisor;
         return $this;
+    }
+    
+    /**
+     * Get the modulus of this number
+     * @return float
+     */
+    public function getModulus() {
+        return sqrt($this->getModulusSquared());
+    }
+    
+    /**
+     * Get the modulus squared of this number
+     * @return float
+     */
+    public function getModulusSquared() {
+        return $this->_real * $this->_real + $this->_imaginary * $this->_imaginary;
+    }
+    
+    /**
+     * Get the complex conjugate of the current number
+     * @return \Complex_Number
+     */
+    public function getComplexConjugate() {
+        return new Complex_Number($this->_real, -1 * $this->_imaginary);
     }
     
     /**

@@ -15,6 +15,8 @@ class Exercise_Chapter1_Ex121 extends Exercise_Base {
         $this->outputInfo($complex1->toString(true) . " - " . $complex2->toString(true) . " = " . $subtraction->toString());
         $division = $numberHandler->divide($complex1, $complex2);
         $this->outputInfo($complex1->toString(true) . " / " . $complex2->toString(true) . " = " . $division->toString());
+        $this->outputInfo("|" . $complex1->toString() . "| = " . $complex1->getModulus());
+        $this->outputInfo("Complex conjugate (overlined) of " . $complex1->toString(true) . " = " . $complex1->getComplexConjugate()->toString());
     }
 
 }
