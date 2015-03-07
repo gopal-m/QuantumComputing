@@ -3,6 +3,8 @@ class Complex_Number {
     protected $_real;
     protected $_imaginary;
     
+    const ROUNDING_PRECISION = 2;
+    
     /**
      * Construct a complex number using the $real and $imaginary part
      */
@@ -112,16 +114,34 @@ class Complex_Number {
     public function toString($surroundWithBrackets = false) {
         $output = '';
         if ($this->_real != 0) {
-            $output = $this->_real;
+            $output = $this->_round($this->_real);
         }
         if ($this->_imaginary < 0) {
-            $output .= ' - ' . (-1 * $this->_imaginary) . 'i';
+            $output .= ' - ' . $this->_round(-1 * $this->_imaginary) . 'i';
         } else if ($this->_imaginary > 0) {
-            $output .= ' + '.$this->_imaginary . 'i';
+            $output .= ' + '.$this->_round($this->_imaginary) . 'i';
         } 
         if ($surroundWithBrackets) {
             $output = '(' . $output . ')';
         }
         return $output;
+    }
+    
+    /**
+     * Get the rounding precision
+     * @return type
+     */
+    protected function _round($number) {
+        return round($number, self::ROUNDING_PRECISION);
+    }
+    
+    /**
+     * Get the polar representation of this number
+     * @return string
+     */
+    public function getPolarRepresentation() {
+        $magnitude = $this->_round($this->getModulus());
+        $phase = $this->_round(atan($this->_imaginary / $this->_real));
+        return "Vector of length $magnitude with an angle from the origin of $phase";
     }
 }
