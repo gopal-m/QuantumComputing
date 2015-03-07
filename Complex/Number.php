@@ -43,4 +43,20 @@ class Complex_Number {
     public function getImaginaryPart() {
         return $this->_imaginary;
     }
+    
+    /**
+     * Returns a string representation of a complex number
+     */
+    public function toString() {
+        $output = '';
+        if ($real != 0) {
+            $output = $real;
+        }
+        if ($this->_imaginary < 0) {
+            $output .= ' ' . $this->_imaginary . 'i';
+        } else if ($this->_imaginary > 0) {
+            $output .= ' + '.$this->_imaginary . 'i';
+        } 
+        return $output;
+    }
 }
