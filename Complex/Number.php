@@ -13,6 +13,18 @@ class Complex_Number {
         $this->_imaginary = (float)$imaginary;
     }
     
+    public function parseByRegex($string) {
+        $output = array();
+        preg_match("/^([+-]?[0-9]*)$|^([+-]?[0-9]*)i$|^([+-]?[0-9]*)([+-][0-9]*)i$/", $string, $output);
+        //preg_match("/([+-]?)([0-9]*)[ ]*([+-]?)[ ]*([0-9]*)[i]?/", $string, $output);
+        // This will parse an arbitrary complex number as string
+        // Depending on format of string, the following can happen:
+        // If $output[1] is filled, it is a Real number with no imaginary part 
+        // If $output[2] is filled, it is an imaginary number with no real part
+        // If it is a mixed one, $output[3] is the real part and $output[4] the imaginary part
+        // Beware that things such as i, -i or 5-i, 2+i need special treatment!
+    }
+    
     /**
      * Add another complex number to this complex number
      */
@@ -24,6 +36,7 @@ class Complex_Number {
     
     /**
      * Multiply another complex number $c with this complex number
+     * (a + bi) * (c + di) = ac + adi + bci - bd = (ac - bd) + (ad + bc)i 
      */
     public function multiply(Complex_Number $c) {
         $tempReal = $this->_real;
